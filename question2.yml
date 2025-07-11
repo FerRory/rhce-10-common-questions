@@ -1,0 +1,15 @@
+## Question 2: Downloading files based on region
+- hosts: all   
+  become: true
+  tasks:
+  # ansible-doc get_url
+  - name: Download app from US region
+    get_url:
+      url: https://us.ex.com/app.tar.gz
+      dest: /tmp/app.tar.gz
+    when: region == 'us'
+  - name: Download app from EU region
+    get_url:
+      url: https://eu.ex.com/app.tar.gz
+      dest: /tmp/app.tar.gz
+    when: region == 'eu'

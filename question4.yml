@@ -1,0 +1,19 @@
+# question 4: Configure SSH for key-based authentication
+- hosts: all
+  tasks:
+    # ansible-doc lineinfile
+    - name: no passwords!
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+    - name: yes keys!
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PubkeyAuthentication'
+        line: 'PubkeyAuthentication yes'
+    - name: Restart SSH
+      service:
+        name: sshd
+        state: restarted     
+    

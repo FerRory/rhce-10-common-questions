@@ -1,0 +1,15 @@
+## Question 1: Service management
+- hosts: all
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: httpd up and enabled
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: MySQLD up and enabled
+      ansible.builtin.service:
+        name: mysqld
+        state: started
+        enabled: yes

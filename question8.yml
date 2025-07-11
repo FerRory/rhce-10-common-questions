@@ -1,0 +1,22 @@
+# question 8: Open web and db ports based on group membership
+- hosts: all
+  tasks:
+    - name: Open web ports
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+      notify: Reload firewalld  
+      when: "'web_nodes' in group_names"
+    - name: open db ports
+      firewalld:
+        port: 3306/tcp    
+        permanent: true
+        state: enabled
+      notify: Reload firewalld
+      when: "'db_nodes' in group_names"
+
+  handlers:
+    - name: Reload firewalld
+      firewalld:
+        state: reloaded 

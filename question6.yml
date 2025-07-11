@@ -1,0 +1,10 @@
+# question 6: Retry an unreliable task
+- hosts: all
+  tasks:
+    # ansible-doc -t keyword -l
+    - name: Unreliable tasks
+      command: /path/to/unreliable_task
+      retries: 5 
+      delay: 10
+      register: result
+      until: result.rc == 0

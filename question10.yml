@@ -1,0 +1,13 @@
+# question 10: Rename hosts based on IP address
+
+- hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+    - debug:
+        msg: "{{ ansible_default_ipv4.address | replace('.', '-') }}"
+    - name: rename hosts 
+      host:
+        name: "{{ ansible_default_ipv4.address | replace('.', '-') }}"
+      when: ansible_default_ipv4.address is defined
+  

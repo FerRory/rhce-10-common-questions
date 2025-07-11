@@ -1,0 +1,16 @@
+# Question 9: Ansible Template Example
+
+# usage ansible-playbook playbook.yml -e "env=production db_hosts=db01.example.com db_ports=3306"
+
+- hosts: all
+  vars:
+    environment: "{{ env }}"
+    db_host: "{{ db_hosts }}"
+    db_port: "{{ db_ports }}"
+
+  tasks:
+    # ansible-doc template
+    - name: dev/staging/prod file
+      template:
+        src: config.j2
+        dest: /remote/node/path.yml

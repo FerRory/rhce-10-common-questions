@@ -1,0 +1,21 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for db_backup
+- name: create database db_backup
+  shell:
+    cmd: "mysqldump -u root -p'alta3' mydb > /backup/db_backup_$(date +%F).sql"
+  
+- name: rotate old backups
+  find:
+    paths: /backup
+    patterns: "db_backup_*.sql"
+    recurse: yes
+    age: 7d
+  register: old_backups
+
+- name: delete old backups
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ old_backups.files }}" 
+  when: old_backups.matched > 0

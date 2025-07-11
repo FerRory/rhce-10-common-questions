@@ -1,0 +1,15 @@
+# question 5: Run a database backup role daily
+- hosts: all
+  tasks:
+    - name: Run database backup role
+      role: db_backup
+
+    - name: Run role daily
+      cron:
+        name: "Run db_backup role daily"
+        user: root
+        minute: "0"
+        hour: "0"
+        job: "/usr/bin/ansible-playbook question5.yml"
+        state: present
+      

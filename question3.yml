@@ -1,0 +1,16 @@
+## Question 3: Create a cron job to backup /etc daily
+
+- hosts: all
+  tasks:
+    - name: Create backup directory
+      file:
+        path: /backup
+        state: directory
+        mode: '0755'
+    # ansible-doc cron
+    - name: Backup /etc daily
+      cron:
+        name: "Daily /etc backup"
+        minute: "0"
+        hour: "0"
+        job: "tar -czf /backup/etc_backup_$(date +%F).tar.gz /etc"

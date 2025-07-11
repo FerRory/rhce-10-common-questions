@@ -1,0 +1,9 @@
+# question 7: Install all updates except kernel
+- hosts: all
+  become: true
+  tasks:
+    - name: Install all updates except kernel
+      yum:
+        name: '*'
+        state: latest
+        exclude: kernel*

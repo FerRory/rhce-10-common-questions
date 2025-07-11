@@ -1,0 +1,11 @@
+[rhel_nodes]
+rhel-1 ansible_python_interpreter=/usr/bin/python3.9 region=us
+rhel-2 ansible_python_interpreter=/usr/bin/python3.9 region=eu
+
+[web_nodes]
+rhel-1 ansible_python_interpreter=/usr/bin/python3.9 region=us
+rhel-2 ansible_python_interpreter=/usr/bin/python3.9 region=eu
+
+[db_nodes]
+rhel-3 ansible_python_interpreter=/usr/bin/python3.9 region=us
+rhel-4 ansible_python_interpreter=/usr/bin/python3.9 region=eu
